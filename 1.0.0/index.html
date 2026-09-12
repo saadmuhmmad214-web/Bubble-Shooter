@@ -1,1 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="theme-color" content="#0a0f24"/>
+<meta name="description" content="Bubble Shooter — a simple, fun bubble popping game."/>
+<link rel="icon" type="image/svg+xml" href="icon.svg"/>
+<link rel="apple-touch-icon" href="icon-192.svg"/>
+<link rel="stylesheet" href="styles.css"/>
+<title>Bubble Shooter</title>
+</head>
+<body>
+<div id="app">
+  <div id="stage">
+    <div id="bg-layer"></div>
+    <canvas id="cv"></canvas>
 
+    <!-- ===================== HUD ===================== -->
+    <div id="hud" class="hidden">
+      <div class="hud-row">
+        <div class="chip"><b id="hud-score">0</b><i>SCORE</i></div>
+        <div class="chip"><b id="hud-shots">--</b><i>SHOTS</i></div>
+        <div class="chip bombs"><b id="hud-bombs">0</b><i>BOMBS</i></div>
+        <button id="btn-pause" class="ic-btn" aria-label="Pause"><span class="bar"></span><span class="bar"></span></button>
+      </div>
+      <div class="prog"><div id="prog-fill"></div></div>
+    </div>
+
+    <!-- ===================== SCREENS ===================== -->
+    <div id="screens">
+
+      <!-- SPLASH -->
+      <section class="screen active" id="scr-splash">
+        <div class="splash-logo" id="splash-logo"></div>
+        <h1 class="game-title">BUBBLE<span>SHOOTER</span></h1>
+        <div class="tap-start">Tap to Start</div>
+      </section>
+
+      <!-- MAIN MENU -->
+      <section class="screen" id="scr-menu">
+        <div class="menu-top">
+          <div class="brand-small">Bubble Shooter</div>
+          <div class="brand-sub">Pop · Match · Clear</div>
+        </div>
+        <div class="menu-btns">
+          <button class="btn" data-nav="levels">Play</button>
+          <button class="btn ghost" data-nav="howto">How to Play</button>
+          <button class="btn ghost" data-nav="settings">Settings</button>
+          <button class="btn ghost" data-nav="about">About</button>
+        </div>
+        <div class="menu-foot" id="menu-foot"></div>
+      </section>
+
+      <!-- LEVEL SELECT -->
+      <section class="screen" id="scr-levels">
+        <div class="screen-head">
+          <button class="btn ghost small" data-nav="menu">Back</button>
+          <h2 class="screen-title">Levels</h2>
+        </div>
+        <div class="scroll"><div class="lvl-grid" id="lvl-grid"></div></div>
+      </section>
+
+      <!-- BRIEFING -->
+      <section class="screen" id="scr-brief">
+        <div class="center-box">
+          <div class="subtitle">Level</div>
+          <h2 class="title" id="brief-title">1</h2>
+          <div class="goal-txt" id="brief-goal">Clear all bubbles!</div>
+          <div class="info-list" id="brief-info"></div>
+          <button class="btn alt" id="brief-start">Start</button>
+          <button class="btn ghost" data-nav="levels">Back</button>
+        </div>
+      </section>
+
+      <!-- PAUSE -->
+      <section class="screen dark" id="scr-pause">
+        <div class="center-box small-box">
+          <h2 class="title" style="font-size:24px">Paused</h2>
+          <div style="height:12px"></div>
+          <button class="btn" id="pause-resume">Resume</button>
+          <button class="btn alt" id="pause-restart">Restart</button>
+          <button class="btn ghost" id="pause-settings">Settings</button>
+          <button class="btn pink" id="pause-quit">Quit Level</button>
+        </div>
+      </section>
+
+      <!-- WIN -->
+      <section class="screen dark" id="scr-win">
+        <div class="center-box">
+          <div class="subtitle">Level Complete</div>
+          <h2 class="title" id="win-title" style="font-size:26px;margin-top:6px">Great Job!</h2>
+          <div class="result-stars" id="win-stars">
+            <span class="star"></span><span class="star"></span><span class="star"></span>
+          </div>
+          <div class="big-score" id="win-score">0</div>
+          <div class="info-list" id="win-info"></div>
+          <button class="btn" id="win-next">Next Level</button>
+          <button class="btn ghost" data-nav="menu">Menu</button>
+        </div>
+      </section>
+
+      <!-- LOSE -->
+      <section class="screen dark" id="scr-lose">
+        <div class="center-box">
+          <div class="subtitle" style="color:#ff7b9c">Level Failed</div>
+          <h2 class="title" style="font-size:22px;margin-top:8px" id="lose-reason">Out of bubbles</h2>
+          <div class="info-list" id="lose-info"></div>
+          <button class="btn alt" id="lose-retry">Retry</button>
+          <button class="btn ghost" data-nav="menu">Menu</button>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="screen" id="scr-settings">
+        <div class="screen-head">
+          <button class="btn ghost small" id="set-back">Back</button>
+          <h2 class="screen-title">Settings</h2>
+        </div>
+        <div class="scroll">
+          <div class="panel">
+            <div class="set-row"><label>SFX Volume</label><input type="range" id="set-sfx" min="0" max="100" value="80"></div>
+            <div class="set-row"><label>Music Volume</label><input type="range" id="set-music" min="0" max="100" value="40"></div>
+            <div class="set-row"><label>Haptics</label><div class="tgl" id="set-haptics"></div></div>
+            <div class="set-row"><label>Aim Assist</label><div class="tgl" id="set-aim"></div></div>
+            <div class="set-row"><label>Trajectory Line</label><div class="tgl" id="set-trail"></div></div>
+          </div>
+          <div style="height:16px"></div>
+          <button class="btn pink" id="set-reset" style="max-width:420px">Reset Progress</button>
+          <div style="height:24px"></div>
+        </div>
+      </section>
+
+      <!-- HOW TO PLAY -->
+      <section class="screen" id="scr-howto">
+        <div class="screen-head">
+          <button class="btn ghost small" data-nav="menu">Back</button>
+          <h2 class="screen-title">How to Play</h2>
+        </div>
+        <div class="scroll">
+          <div class="panel">
+            <div class="how-demo" id="how-demo"><div class="how-cannon"></div></div>
+            <div class="how-step"><div class="how-num">1</div><p>Drag anywhere to aim. A dashed line shows where the bubble will go, including wall bounces.</p></div>
+            <div class="how-step"><div class="how-num">2</div><p>Release to fire. The bubble sticks to the first spot it touches.</p></div>
+            <div class="how-step"><div class="how-num">3</div><p>Match <b>3 or more</b> of the same color to pop them. Bubbles that lose their anchor fall too!</p></div>
+            <div class="how-step"><div class="how-num">4</div><p>Tap the shooter to swap the current bubble with the next one.</p></div>
+            <div class="how-step"><div class="how-num">5</div><p>Use a <b>Bomb</b> to blow up all nearby bubbles. You have a limited number per level.</p></div>
+            <div class="how-step"><div class="how-num">6</div><p>Watch the red danger line. If bubbles cross it, the level ends.</p></div>
+          </div>
+          <div style="height:24px"></div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="screen" id="scr-about">
+        <div class="screen-head">
+          <button class="btn ghost small" data-nav="menu">Back</button>
+          <h2 class="screen-title">About</h2>
+        </div>
+        <div class="scroll">
+          <div class="center-box" style="max-width:420px">
+            <div class="about-logo" id="about-logo"></div>
+            <h3 class="about-title" id="about-title">Bubble Shooter</h3>
+            <div class="about-ver" id="about-ver">v1.0.0</div>
+            <div class="about-credits" id="about-credits"></div>
+            <div class="about-license" id="about-license"></div>
+          </div>
+          <div style="height:24px"></div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===== Scripts (order matters) ===== -->
+<script src="GameUtils.js"></script>
+<script src="GameGraphies.js"></script>
+<script src="GameEngine.js"></script>
+<script src="game.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
