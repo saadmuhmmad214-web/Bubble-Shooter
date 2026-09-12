@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 1280" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a1140"/>
+      <stop offset="0.45" stop-color="#5a1c3a"/>
+      <stop offset="1" stop-color="#120616"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="50%" cy="60%" r="55%">
+      <stop offset="0" stop-color="#ff8ad8" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#ff8ad8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="b1" cx="32%" cy="30%" r="70%">
+      <stop offset="0" stop-color="#ffd6ec"/><stop offset="0.5" stop-color="#ff5f9e"/><stop offset="1" stop-color="#8f0f3a"/>
+    </radialGradient>
+    <radialGradient id="b2" cx="32%" cy="30%" r="70%">
+      <stop offset="0" stop-color="#fff3b8"/><stop offset="0.5" stop-color="#ffb02e"/><stop offset="1" stop-color="#7d3f00"/>
+    </radialGradient>
+  </defs>
+  <rect width="720" height="1280" fill="url(#bg)"/>
+  <ellipse cx="360" cy="860" rx="420" ry="220" fill="url(#sun)"/>
+  <circle cx="130" cy="220" r="120" fill="url(#b1)" opacity="0.14"/>
+  <circle cx="620" cy="260" r="90"  fill="url(#b2)" opacity="0.15"/>
+  <circle cx="220" cy="980" r="160" fill="url(#b1)" opacity="0.10"/>
+  <circle cx="560" cy="1100" r="130" fill="url(#b2)" opacity="0.10"/>
+  <circle cx="360" cy="520" r="200" fill="url(#b1)" opacity="0.05"/>
+</svg>

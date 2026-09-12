@@ -1,0 +1,63 @@
+{
+  "game": {
+    "title": "Bubble Shooter",
+    "version": "1.0.0",
+    "showCredit": true
+  },
+
+  "credit": {
+    "developer": "Muhammad Saad",
+    "country": "Pakistan",
+    "license": "MIT",
+    "year": "2025"
+  },
+
+  "background": {
+    "mode": "svg",
+    "file": "backgrounds/01.svg"
+  },
+
+  "grid": {
+    "cols": 11,
+    "bubbleRadius": 32,
+    "gridTop": 178,
+    "maxRows": 14,
+    "shooterBottomMargin": 152,
+    "dangerGap": 3.0
+  },
+
+  "shooting": {
+    "shotSpeed": 1450,
+    "gravity": 2100,
+    "aimAssist": true,
+    "trajectoryPreview": true,
+    "wallBounce": true
+  },
+
+  "gameplay": {
+    "bombsPerLevel": 3,
+    "shotsPerLevel": 60,
+    "dropEveryShots": 12,
+    "popScore": 10,
+    "floatScore": 25,
+    "comboWindow": 1.6,
+    "maxParticles": 280
+  },
+
+  "settings": {
+    "sfx": 0.8,
+    "music": 0.4,
+    "haptics": true,
+    "aimAssist": true,
+    "trajectory": true
+  },
+
+  "colors": [
+    { "name": "red",    "light": "#ffc2c8", "main": "#ff4d5e", "dark": "#8f0f26", "pattern": "dots" },
+    { "name": "blue",   "light": "#bcdcff", "main": "#3a9dff", "dark": "#0b3d7d", "pattern": "stripes" },
+    { "name": "green",  "light": "#c2ffd8", "main": "#3fd97a", "dark": "#0d6b36", "pattern": "chevron" },
+    { "name": "yellow", "light": "#fff3b8", "main": "#ffce2e", "dark": "#9c6a00", "pattern": "star" },
+    { "name": "purple", "light": "#e2c8ff", "main": "#b06bff", "dark": "#4d1c94", "pattern": "cross" },
+    { "name": "cyan",   "light": "#c2fffa", "main": "#2fe0d0", "dark": "#0a6e66", "pattern": "hex" }
+  ]
+}

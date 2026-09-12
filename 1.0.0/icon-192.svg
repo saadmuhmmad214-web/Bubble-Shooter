@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#123a70"/>
+      <stop offset="1" stop-color="#04070f"/>
+    </linearGradient>
+    <radialGradient id="b1" cx="34%" cy="28%" r="70%">
+      <stop offset="0" stop-color="#bcdcff"/><stop offset="0.5" stop-color="#3a9dff"/><stop offset="1" stop-color="#0b3d7d"/>
+    </radialGradient>
+    <radialGradient id="b2" cx="34%" cy="28%" r="70%">
+      <stop offset="0" stop-color="#ffc2c8"/><stop offset="0.5" stop-color="#ff4d5e"/><stop offset="1" stop-color="#8f0f26"/>
+    </radialGradient>
+    <radialGradient id="b3" cx="34%" cy="28%" r="70%">
+      <stop offset="0" stop-color="#c2ffd8"/><stop offset="0.5" stop-color="#3fd97a"/><stop offset="1" stop-color="#0d6b36"/>
+    </radialGradient>
+  </defs>
+  <rect width="192" height="192" rx="40" fill="url(#bg)"/>
+  <circle cx="54"  cy="62"  r="26" fill="url(#b1)"/>
+  <circle cx="105" cy="54"  r="28" fill="url(#b2)"/>
+  <circle cx="150" cy="78"  r="22" fill="url(#b3)"/>
+  <circle cx="66"  cy="118" r="24" fill="url(#b3)"/>
+  <circle cx="120" cy="114" r="26" fill="url(#b1)"/>
+  <circle cx="148" cy="144" r="18" fill="url(#b2)"/>
+</svg>
