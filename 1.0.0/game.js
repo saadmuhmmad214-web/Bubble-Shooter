@@ -113,7 +113,6 @@ window.BS = window.BS || {};
       }
       g.globalAlpha = 1;
       if (this.bomb) {
-        // Draw bomb-flavored bubble (dark core with fuse glow)
         const t = performance.now() / 1000;
         const pulse = 0.5 + 0.5 * Math.sin(t * 6);
         g.beginPath(); g.arc(this.x, this.y, G.R * (1.15 + 0.10 * pulse), 0, 6.2832);
@@ -174,6 +173,7 @@ window.BS = window.BS || {};
     Game.initialBubbles = E.countBubbles();
     Game.totalBubbles = Game.initialBubbles;
 
+    // ⚡ BUG FIX: Board build hone ke BAAD colors pick karo
     Game.current = { ci: E.pickExistingColor(Game.colorCount) };
     Game.next = { ci: E.pickExistingColor(Game.colorCount) };
 
@@ -198,10 +198,8 @@ window.BS = window.BS || {};
 
     const i = cell.i, c = cell.c;
 
-    // If it landed below the danger line, immediate fail
     const maxRow = G.maxRows;
     if (i > maxRow + 1) {
-      // place it anyway then fail
       E.setBubble(i, c, { ci: shot.ci });
       Game.shake = 18;
       Game.flash = 0.5;
@@ -214,7 +212,6 @@ window.BS = window.BS || {};
     U.buzz(8);
     Game.shake = Math.max(Game.shake, 1.4);
 
-    // Handle bomb
     if (shot.bomb) {
       const list = E.collectRadius(i, c, 2);
       popList(list, true);
@@ -223,33 +220,27 @@ window.BS = window.BS || {};
       Game.flash = Math.max(Game.flash, 0.4);
       U.buzz(45);
     } else {
-      // Regular color match
       const group = E.floodSame(i, c, shot.ci);
       if (group.length >= 3) {
         popList(group, false);
       }
     }
 
-    // Floating clusters
     const floaters = E.findFloating();
     if (floaters.length > 0) detachList(floaters);
 
-    // Count clearing
     if (E.countBubbles() === 0) {
       endLevel(true);
       return;
     }
 
-    // Row drop pressure
     Game.shotsSinceDrop++;
     if (Game.shotsSinceDrop >= Game.dropEvery) {
       Game.shotsSinceDrop = 0;
       addRow();
     }
 
-    // Check danger
     checkDanger();
-
     nextBubble();
     NS.UI.updateHud();
   }
@@ -314,9 +305,29 @@ window.BS = window.BS || {};
     }
   }
 
+  /* ------------------------------------------------------------
+     ⚡ BUG FIX: nextBubble
+     Purani bubble ko promote karne se pehle check karo ke uska
+     color ab bhi board pe hai. Agar nahi, to naya pick karo.
+     ------------------------------------------------------------ */
   function nextBubble() {
+    // Promote "next" → "current"
     Game.current = Game.next;
+
+    // Agar promoted bubble ka color board pe nahi hai, dobara pick karo
+    if (!E.colorExists(Game.current.ci)) {
+      Game.current = { ci: E.pickExistingColor(Game.colorCount) };
+    }
+
+    // "next" hamesha current board state se pick karo
     Game.next = { ci: E.pickExistingColor(Game.colorCount) };
+
+    // Safety: agar current aur next ek hi hain aur sirf 1 color bacha,
+    // toh next bhi wahi rakho
+    if (!E.colorExists(Game.next.ci)) {
+      Game.next = { ci: E.pickExistingColor(Game.colorCount) };
+    }
+
     Game.useBomb = false;
     NS.UI.updateHud();
   }
@@ -467,33 +478,28 @@ window.BS = window.BS || {};
     if (Game.active && !Game.paused) {
       shot.update(dt, onShotLand);
 
-      // combo timer
       if (Game.comboTimer > 0) {
         Game.comboTimer -= dt;
         if (Game.comboTimer <= 0) Game.combo = 0;
       }
 
-      // Decay effects
       Game.shake *= Math.pow(0.0016, dt);
       if (Game.shake < 0.05) Game.shake = 0;
       Game.flash = Math.max(0, Game.flash - dt * 2.2);
       Game.recoil = Math.max(0, Game.recoil - dt * 4.5);
       Game.muzzle = Math.max(0, Game.muzzle - dt * 6);
 
-      // Falling bubbles
       const grav = NS.State.cfg.shooting.gravity;
       for (let i = Game.falling.length - 1; i >= 0; i--) {
         Game.falling[i].update(dt, grav);
         if (Game.falling[i].dead) Game.falling.splice(i, 1);
       }
 
-      // Out of shots check
       if (!shot.active && Game.shotsLeft <= 0 && E.countBubbles() > 0) {
         endLevel(false, 'Out of bubbles');
       }
     }
 
-    // Particles & texts animate always
     Gr.Particles.update(dt);
     for (let i = Game.texts.length - 1; i >= 0; i--) {
       Game.texts[i].update(dt);
@@ -625,7 +631,6 @@ window.BS = window.BS || {};
       g.globalAlpha = 1;
     }
 
-    // wall bounce markers
     for (let i = 1; i < pts.length - 1; i++) {
       const p = pts[i];
       if (p.x < G.R * 1.2 || p.x > G.W - G.R * 1.2) {
@@ -646,7 +651,6 @@ window.BS = window.BS || {};
 
     g.save();
 
-    // base platform
     g.beginPath();
     g.ellipse(bx, by + G.R * 1.15, G.R * 2.1, G.R * 0.55, 0, 0, 6.2832);
     g.fillStyle = 'rgba(10,20,44,.85)';
@@ -655,7 +659,6 @@ window.BS = window.BS || {};
     g.lineWidth = 2;
     g.stroke();
 
-    // barrel
     g.save();
     g.translate(bx, by);
     g.rotate(a + Math.PI / 2);
@@ -675,7 +678,6 @@ window.BS = window.BS || {};
     g.stroke();
     g.restore();
 
-    // muzzle flash
     if (Game.muzzle > 0.02) {
       const mx = bx + Math.cos(a) * G.R * 2.1;
       const my = by + Math.sin(a) * G.R * 2.1;
@@ -689,7 +691,6 @@ window.BS = window.BS || {};
       g.globalAlpha = 1;
     }
 
-    // current bubble
     if (Game.useBomb) {
       const t = performance.now() / 1000;
       const pulse = 0.5 + 0.5 * Math.sin(t * 6);
@@ -711,7 +712,6 @@ window.BS = window.BS || {};
       Gr.drawBubble(g, bx, by, G.R, Game.current.ci);
     }
 
-    // next bubble
     const nx = G.W - G.R * 2.4;
     const ny = by + G.R * 0.3;
     g.globalAlpha = 0.85;
