@@ -269,6 +269,25 @@ window.BS = window.BS || {};
     return arr[(Math.random() * arr.length) | 0];
   }
 
+  /* ------------------------------------------------------------
+     ⚡ BUG FIX: colorExists
+     Kya diya gaya color abhi board pe mojood hai?
+     Used by game.js nextBubble() to prevent stale colors.
+     ------------------------------------------------------------ */
+  function colorExists(ci) {
+    for (let i = 0; i < grid.rows.length; i++) {
+      const row = grid.rows[i];
+      if (!row) continue;
+      for (let c = 0; c < row.length; c++) {
+        if (row[c] && row[c].ci === ci) return true;
+      }
+    }
+    return false;
+  }
+
+  /* ------------------------------------------------------------
+     EXPORTS
+     ------------------------------------------------------------ */
   NS.Engine = {
     init, reset,
     grid,
@@ -278,5 +297,6 @@ window.BS = window.BS || {};
     snapCell, collidesAt, simulateShot,
     floodSame, findFloating, collectRadius, addRow,
     pickExistingColor,
+    colorExists,
   };
 })(window.BS);
