@@ -1,17 +1,17 @@
 # 🫧 Free HTML5 Bubble Shooter Game — Open Source Vanilla JavaScript Engine
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/)
-[![Platform](https://img.shields.io/badge/platform-Web%20%7C%20Mobile%20%7C%20Desktop-lightgrey.svg)](https://github.com/)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/)
-[![Made with JavaScript](https://img.shields.io/badge/Made%20with-JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://github.com/)
-[![No Dependencies](https://img.shields.io/badge/dependencies-0-success.svg)](https://github.com/)
-[![Open Source](https://img.shields.io/badge/Open%20Source-%E2%9D%A4-red.svg)](https://github.com/)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/saadmuhmmad214-web/Bubble-Shooter)
+[![Platform](https://img.shields.io/badge/platform-Web%20%7C%20Mobile%20%7C%20Desktop-lightgrey.svg)](https://github.com/saadmuhmmad214-web/Bubble-Shooter)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/saadmuhmmad214-web/Bubble-Shooter)
+[![Made with JavaScript](https://img.shields.io/badge/Made%20with-JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://github.com/saadmuhmmad214-web/Bubble-Shooter)
+[![No Dependencies](https://img.shields.io/badge/dependencies-0-success.svg)](https://github.com/saadmuhmmad214-web/Bubble-Shooter)
+[![Open Source](https://img.shields.io/badge/Open%20Source-%E2%9D%A4-red.svg)](https://github.com/saadmuhmmad214-web/Bubble-Shooter)
 
 > **A lightweight, mobile-first, open-source HTML5 Bubble Shooter game built with pure Vanilla JavaScript, HTML5 Canvas 2D, and Web Audio API. 100% free, zero external dependencies, responsive, and playable offline.**
 
-🎮 **Live Demo:** [Play Bubble Shooter Online](https://your-username.github.io/your-repo-name/)  
-📂 **Source Code:** [GitHub Repository](https://github.com/your-username/your-repo-name)
+🎮 **Live Demo:** [Play Bubble Shooter Online](https://saadmuhmmad214-web.github.io/Bubble-Shooter/1.0.0/index.html)  
+📂 **Source Code:** [GitHub Repository](https://github.com/saadmuhmmad214-web/Bubble-Shooter)
 
 ---
 
@@ -19,9 +19,9 @@
 - [About The Game](#-about-the-game)
 - [Key Features](#-key-features)
 - [Gameplay Mechanics](#-gameplay-mechanics)
-- [Tech Stack & Architecture](#-tech-stack--architecture)
+- [Tech Stack & Keywords](#-tech-stack--keywords)
 - [Quick Start & Installation](#-quick-start--installation)
-- [License & Credits](#-license--credits)
+- [License & Developer](#-license--developer)
 
 ---
 
@@ -74,9 +74,9 @@ Clone the repository and run the game instantly in any browser — no web server
 
 ```bash
 # Clone this repository
-git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+git clone [https://github.com/saadmuhmmad214-web/Bubble-Shooter.git](https://github.com/saadmuhmmad214-web/Bubble-Shooter.git)
 
 # Navigate to project folder
-cd your-repo-name
+cd Bubble-Shooter
 
 # Open index.html in your browser or serve via GitHub Pages
